@@ -1,33 +1,37 @@
+import Layout from "../../layout";
+
 export default function Edit({ person }) {
   return (
     <>
-      <form type="submit">
-        <label>
-          <h1>Full Name:</h1>
-          <input placeholder={person.fullName} />
-        </label>
-        <label>
-          <h1>Age:</h1>
-          <input placeholder={person.age} />
-        </label>
-        <label>
-          <h1>Occupation:</h1>
-          <input placeholder={person.occupation} />
-        </label>
-        <label>
-          <h1>Nickname:</h1>
-          <input placeholder={person.nickname} />
-        </label>
-        <label>
-          <h1>Gender:</h1>
-          <input placeholder={person.gender} />
-        </label>
-        <label>
-          <h1>Picture:</h1>
-          <input placeholder={person.picture} />
-        </label>
-        <button>Submit</button>
-      </form>
+      <Layout>
+        <form type="submit">
+          <label>
+            <h1>Full Name:</h1>
+            <input placeholder={person.fullName} />
+          </label>
+          <label>
+            <h1>Age:</h1>
+            <input placeholder={person.age} />
+          </label>
+          <label>
+            <h1>Occupation:</h1>
+            <input placeholder={person.occupation} />
+          </label>
+          <label>
+            <h1>Nickname:</h1>
+            <input placeholder={person.nickname} />
+          </label>
+          <label>
+            <h1>Gender:</h1>
+            <input placeholder={person.gender} />
+          </label>
+          <label>
+            <h1>Picture:</h1>
+            <input placeholder={person.picture} />
+          </label>
+          <button>Submit</button>
+        </form>
+      </Layout>
     </>
   );
 }

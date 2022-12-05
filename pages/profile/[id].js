@@ -1,39 +1,42 @@
 import Link from "next/link";
+import Layout from "../layout";
 
 export default function People({ person, tasks }) {
   return (
     <>
-      <div>
-        <img src={person.picture} />
-        <h1>
-          {person.fullName} ({person.nickname})
-        </h1>
-        <h2>{person.occupation} </h2>
-        <h3>{person.gender}</h3>
-        <h3>{person.age} Years Old</h3>
-      </div>
-      <div>
-        {tasks.map((e, i) => {
-          return (
-            <div key={i}>
-              <h1> {e.title}</h1>
-              <p>{e.description}</p>
-              <h2>{e.completed ? "Completed" : "Not Completed"}</h2>
-              <Link href={`/tasks/${e.id}/edit`}>
-                <button>Edit task</button>
-              </Link>
-              <button>
-                {e.completed ? "Mark as not completed" : "Mark as completed"}
-              </button>
-            </div>
-          );
-        })}
-      </div>
-      <div>
-        <Link href={`/profile/${person.id}/edit`}>
-          <button>Edit Information</button>
-        </Link>
-      </div>
+      <Layout>
+        <div>
+          <img src={person.picture} />
+          <h1>
+            {person.fullName} ({person.nickname})
+          </h1>
+          <h2>{person.occupation} </h2>
+          <h3>{person.gender}</h3>
+          <h3>{person.age} Years Old</h3>
+        </div>
+        <div>
+          {tasks.map((e, i) => {
+            return (
+              <div key={i}>
+                <h1> {e.title}</h1>
+                <p>{e.description}</p>
+                <h2>{e.completed ? "Completed" : "Not Completed"}</h2>
+                <Link href={`/tasks/${e.id}/edit`}>
+                  <button>Edit task</button>
+                </Link>
+                <button>
+                  {e.completed ? "Mark as not completed" : "Mark as completed"}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <div>
+          <Link href={`/profile/${person.id}/edit`}>
+            <button>Edit Information</button>
+          </Link>
+        </div>
+      </Layout>
     </>
   );
 }
