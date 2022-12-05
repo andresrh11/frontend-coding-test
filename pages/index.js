@@ -1,9 +1,24 @@
 import Link from "next/link";
-import axios from "axios";
+import Layout from "./layout";
+
 function HomePage({ people }) {
   return (
     <>
-      <div></div>
+      <div>
+        <nav>
+          <Layout>
+            <div className="flex">
+              <h2>Order By:</h2>
+              <select>
+                <option></option>
+                <option value="asc">Asc</option>
+                <option value="desc">Desc</option>
+              </select>
+            </div>
+          </Layout>
+        </nav>
+      </div>
+      <h1>List Of People</h1>
       <div className="grid gap-4 grid-cols-3 grid-rows-auto">
         {people.map((e, i) => {
           return (
