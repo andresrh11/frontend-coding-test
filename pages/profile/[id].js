@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function People({ person }) {
+export default function People({ person, tasks }) {
   return (
     <>
       <div>
@@ -13,8 +13,25 @@ export default function People({ person }) {
         <h3>{person.age} Years Old</h3>
       </div>
       <div>
+        {tasks.map((e, i) => {
+          return (
+            <div key={i}>
+              <h1> {e.title}</h1>
+              <p>{e.description}</p>
+              <h2>{e.completed ? "Completed" : "Not Completed"}</h2>
+              <Link href={`/tasks/${e.id}/edit`}>
+                <button>Edit task</button>
+              </Link>
+              <button>
+                {e.completed ? "Mark as not completed" : "Mark as completed"}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+      <div>
         <Link href={`/profile/${person.id}/edit`}>
-          <button >Edit Information</button>
+          <button>Edit Information</button>
         </Link>
       </div>
     </>
@@ -36,6 +53,14 @@ async function getPersonData(id) {
   const person = jsondata.find((e) => e.id == id);
   return person;
 }
+export async function getTasks(id) {
+  const data = await fetch("http://localhost:3001/tasks");
+  const jsondata = await data.json();
+  const tasks = jsondata.filter((e) => e.personId == id);
+
+  return tasks;
+}
+
 export async function getStaticPaths() {
   const people = await getAllPeopleId();
 
@@ -45,12 +70,13 @@ export async function getStaticPaths() {
   };
 }
 export async function getStaticProps({ params }) {
-  console.log(params);
   const person = await getPersonData(params.id);
-  console.log(person);
+  const tasks = await getTasks(params.id);
+
   return {
     props: {
       person,
+      tasks,
     },
   };
 }
