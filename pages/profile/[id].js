@@ -41,7 +41,6 @@ export default function People({ person, tasks }) {
         personId: taskFind[0].personId,
       });
     }
-    window.location.reload();
   };
   return (
     <>
@@ -65,15 +64,19 @@ export default function People({ person, tasks }) {
                 <Link href={`/tasks/${e.id}/edit`}>
                   <button>Edit task</button>
                 </Link>
-                <button value={e.id} onClick={handleClick}>
-                  {e.completed ? "Mark as not completed" : "Mark as completed"}
-                </button>
+                <Link href={`/profile/${person.id}`}>
+                  <button value={e.id} onClick={handleClick}>
+                    {e.completed
+                      ? "Mark as not completed"
+                      : "Mark as completed"}
+                  </button>
+                </Link>
               </div>
             );
           })}
         </div>
         <div>
-          <Link href={`/profile/${person.id}/edit`}>
+          <Link href={`/profile/${person.id}`}>
             <button>Edit Information</button>
           </Link>
         </div>

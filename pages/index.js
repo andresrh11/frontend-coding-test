@@ -6,7 +6,6 @@ import Layout from "./layout";
 function HomePage({ people }) {
   const [cards, setCards] = useState(people);
 
-  
   const handleChange = (e) => {
     if (e.target.value === "desc") {
       setCards(
@@ -43,7 +42,6 @@ function HomePage({ people }) {
               <h2>Order By Age:</h2>
               <Link href="/">
                 <select onChange={handleChange}>
-                  <option></option>
                   <option value="asc">Asc</option>
                   <option value="desc">Desc</option>
                 </select>

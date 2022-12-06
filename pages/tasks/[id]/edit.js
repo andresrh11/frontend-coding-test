@@ -1,6 +1,6 @@
 import Layout from "../../layout";
 import axios from "axios";
-
+import Link from "next/link";
 import { useState } from "react";
 export default function EditTask({ tasks }) {
   console.log(tasks);
@@ -35,43 +35,44 @@ export default function EditTask({ tasks }) {
   };
   return (
     <>
-      <Layout>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <h1>Title:</h1>
-            <input
-              placeholder={tasks[0].title}
-              name="title"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Description:</h1>
-            <input
-              placeholder={tasks[0].description}
-              name="description"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Status:</h1>
+      <Layout></Layout>
 
-            {tasks[0].completed ? (
-              <select name="completed" onChange={handleInputChange}>
-                <option value={true}>Completed</option>
-                <option value={false}> Not Completed</option>
-              </select>
-            ) : (
-              <select name="completed" onChange={handleInputChange}>
-                <option value={false}> Not Completed</option>
-                <option value={true}>Completed</option>
-              </select>
-            )}
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-        <a href={`/profile/${tasks[0].personId}`}> Volver Atrás</a>
-      </Layout>
+      <form onSubmit={handleSubmit}>
+        <label>
+          <h1>Title:</h1>
+          <input
+            placeholder={tasks[0].title}
+            name="title"
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          <h1>Description:</h1>
+          <input
+            placeholder={tasks[0].description}
+            name="description"
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          <h1>Status:</h1>
+
+          {tasks[0].completed === true ? (
+            <select name="completed" onChange={handleInputChange}>
+              <option value={true}>Completed</option>
+              <option value={false}> Not Completed</option>
+            </select>
+          ) : (
+            <select name="completed" onChange={handleInputChange}>
+              <option value={false}> Not Completed</option>
+              <option value={true}>Completed</option>
+            </select>
+          )}
+        </label>
+        <button type="submit">Submit</button>{" "}
+      </form>
+
+      <a href={`/profile/${tasks[0].personId}`}> Volver Atrás</a>
     </>
   );
 }
