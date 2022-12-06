@@ -1,7 +1,48 @@
 import Link from "next/link";
 import Layout from "../layout";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function People({ person, tasks }) {
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    completed: "",
+    startDate: "",
+    endDate: "",
+    id: "",
+    personId: "",
+  });
+
+  useEffect(() => {
+    putCompleted(task.id, task);
+  }, [task]);
+  const handleClick = (e) => {
+    let taskFind = tasks.filter((f) => f.id == e.target.value);
+
+    if (taskFind[0].completed === true) {
+      setTask({
+        title: taskFind[0].title,
+        description: taskFind[0].description,
+        completed: false,
+        startDate: taskFind[0].startDate,
+        endDate: taskFind[0].endDate,
+        id: taskFind[0].id,
+        personId: taskFind[0].personId,
+      });
+    } else {
+      setTask({
+        title: taskFind[0].title,
+        description: taskFind[0].description,
+        completed: true,
+        startDate: taskFind[0].startDate,
+        endDate: taskFind[0].endDate,
+        id: taskFind[0].id,
+        personId: taskFind[0].personId,
+      });
+    }
+    window.location.reload();
+  };
   return (
     <>
       <Layout>
@@ -24,7 +65,7 @@ export default function People({ person, tasks }) {
                 <Link href={`/tasks/${e.id}/edit`}>
                   <button>Edit task</button>
                 </Link>
-                <button>
+                <button value={e.id} onClick={handleClick}>
                   {e.completed ? "Mark as not completed" : "Mark as completed"}
                 </button>
               </div>
@@ -44,7 +85,7 @@ export default function People({ person, tasks }) {
 async function getAllPeopleId() {
   const data = await fetch("http://localhost:3001/people");
   const jsondata = await data.json();
-  
+
   return jsondata.map((e) => ({
     params: {
       id: e.id.toString(),
@@ -83,4 +124,13 @@ export async function getStaticProps({ params }) {
       tasks,
     },
   };
+}
+export async function putCompleted(id, payload) {
+  try {
+    console.log(payload);
+    const res = await axios.put(`http://localhost:3001/tasks/${id}`, payload);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
