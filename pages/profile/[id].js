@@ -44,6 +44,7 @@ export default function People({ person, tasks }) {
 async function getAllPeopleId() {
   const data = await fetch("http://localhost:3001/people");
   const jsondata = await data.json();
+  
   return jsondata.map((e) => ({
     params: {
       id: e.id.toString(),

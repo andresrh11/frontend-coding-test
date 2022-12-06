@@ -1,35 +1,89 @@
+import axios from "axios";
+
+import { useState } from "react";
 import Layout from "../../layout";
 
 export default function Edit({ person }) {
+  const [persona, setPersona] = useState({
+    fullName: person.fullName,
+    age: person.age,
+    occupation: person.occupation,
+    nickname: person.nickname,
+    gender: person.gender,
+    picture: person.picture,
+  });
+
+  const handleInputChange = (e) => {
+    setPersona({
+      ...persona,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    putPerson(person.id, persona);
+    setPersona({
+      fullName: person.fullName,
+      age: person.age,
+      occupation: person.occupation,
+      nickname: person.nickname,
+      gender: person.gender,
+      picture: person.picture,
+    });
+  };
   return (
     <>
       <Layout>
-        <form type="submit">
+        <form onSubmit={handleSubmit}>
           <label>
             <h1>Full Name:</h1>
-            <input placeholder={person.fullName} />
+            <input
+              placeholder={person.fullName}
+              name="fullName"
+              onChange={handleInputChange}
+            />
           </label>
           <label>
             <h1>Age:</h1>
-            <input placeholder={person.age} />
+            <input
+              placeholder={person.age}
+              name="age"
+              onChange={handleInputChange}
+            />
           </label>
           <label>
             <h1>Occupation:</h1>
-            <input placeholder={person.occupation} />
+            <input
+              placeholder={person.occupation}
+              name="occupation"
+              onChange={handleInputChange}
+            />
           </label>
           <label>
             <h1>Nickname:</h1>
-            <input placeholder={person.nickname} />
+            <input
+              placeholder={person.nickname}
+              name="nickname"
+              onChange={handleInputChange}
+            />
           </label>
           <label>
             <h1>Gender:</h1>
-            <input placeholder={person.gender} />
+            <input
+              placeholder={person.gender}
+              name="gender"
+              onChange={handleInputChange}
+            />
           </label>
           <label>
             <h1>Picture:</h1>
-            <input placeholder={person.picture} />
+            <input
+              placeholder={person.picture}
+              name="picture"
+              onChange={handleInputChange}
+            />
           </label>
-          <button>Submit</button>
+          <button type="submit">Submit</button>
         </form>
       </Layout>
     </>
@@ -76,4 +130,13 @@ export async function getStaticProps({ params }) {
       tasks,
     },
   };
+}
+export async function putPerson(id, payload) {
+  try {
+    console.log(payload);
+    const res = await axios.put(`http://localhost:3001/people/${id}`, payload);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
