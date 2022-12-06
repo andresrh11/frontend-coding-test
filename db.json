@@ -156,12 +156,12 @@
       "personId": 7
     },
     {
-      "id": 8,
       "title": "Task 8",
       "description": "This is the eighth task on the list.",
-      "completed": true,
+      "completed": false,
       "startDate": "2022-12-04",
       "endDate": "2022-12-08",
+      "id": 8,
       "personId": 8
     },
     {
@@ -245,12 +245,12 @@
       "personId": 7
     },
     {
-      "id": 18,
       "title": "Task 18",
       "description": "This is the eighteenth task on the list.",
-      "completed": false,
+      "completed": true,
       "startDate": "2022-12-04",
       "endDate": null,
+      "id": 18,
       "personId": 8
     },
     {

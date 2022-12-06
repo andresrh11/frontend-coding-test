@@ -1,43 +1,39 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useState } from "react";
+
 import Layout from "./layout";
 
 function HomePage({ people }) {
-  const cards = people;
-  cards.sort(function (a, b) {
-    if (a.age > b.age) {
-      return 1;
-    }
-    if (b.age > a.age) {
-      return -1;
-    }
-    return 0;
-  });
-  useEffect(() => {}, [cards]);
-  function handleChange(e) {
-    e.preventDefault();
-    if (e.target.value === "asc") {
-      cards.sort(function (a, b) {
-        if (a.age > b.age) {
-          return 1;
-        }
-        if (b.age > a.age) {
-          return -1;
-        }
-        return 0;
-      });
+  const [cards, setCards] = useState(people);
+
+  
+  const handleChange = (e) => {
+    if (e.target.value === "desc") {
+      setCards(
+        people.sort(function (a, b) {
+          if (a.age > b.age) {
+            return -1;
+          }
+          if (b.age > a.age) {
+            return 1;
+          }
+          return 0;
+        })
+      );
     } else {
-      cards.sort(function (a, b) {
-        if (a.age > b.age) {
-          return -1;
-        }
-        if (b.age > a.age) {
-          return 1;
-        }
-        return 0;
-      });
+      setCards(
+        people.sort(function (a, b) {
+          if (a.age > b.age) {
+            return 1;
+          }
+          if (b.age > a.age) {
+            return -1;
+          }
+          return 0;
+        })
+      );
     }
-  }
+  };
   return (
     <>
       <div>
@@ -45,11 +41,13 @@ function HomePage({ people }) {
           <Layout>
             <div className="flex">
               <h2>Order By Age:</h2>
-              <select onChange={(e) => handleChange(e)}>
-                <option></option>
-                <option value="asc">Asc</option>
-                <option value="desc">Desc</option>
-              </select>
+              <Link href="/">
+                <select onChange={handleChange}>
+                  <option></option>
+                  <option value="asc">Asc</option>
+                  <option value="desc">Desc</option>
+                </select>
+              </Link>
             </div>
           </Layout>
         </nav>
@@ -75,9 +73,19 @@ function HomePage({ people }) {
 export async function getStaticProps() {
   const data = await fetch("http://localhost:3001/people");
   const jsondata = await data.json();
+
+  jsondata.sort(function (a, b) {
+    if (a.age > b.age) {
+      return 1;
+    }
+    if (b.age > a.age) {
+      return -1;
+    }
+    return 0;
+  });
+
   return {
     props: { people: jsondata },
   };
 }
-
 export default HomePage;
