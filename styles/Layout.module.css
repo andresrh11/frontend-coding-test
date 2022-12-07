@@ -4,7 +4,8 @@
     color: black;
     font-weight: 700;
     font-size: x-large;
-    text-align: center;
+    text-align: left;
+    padding-left: 30px;
     cursor: pointer;
     font-family:Century Gothic, CenturyGothic, AppleGothic, sans-serif;
     box-shadow: 3px ;

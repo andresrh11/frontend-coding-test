@@ -3,13 +3,14 @@ import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "../../../styles/EditTask.module.css";
+import validationsTasks from "../../../validationsTasks";
 export default function EditTask({ tasks }) {
-  console.log(tasks);
+  const [errors, setErrors] = useState({});
   const [task, setTask] = useState({
     id: tasks[0].id,
-    title: tasks[0].title,
-    description: tasks[0].description,
-    completed: tasks[0].completed,
+    title: "",
+    description: "",
+    completed: null,
     startDate: tasks[0].startDate,
     endDate: tasks[0].endDate,
     personId: tasks[0].personId,
@@ -20,15 +21,16 @@ export default function EditTask({ tasks }) {
       ...task,
       [e.target.name]: e.target.value,
     });
+    setErrors(validationsTasks({ ...task, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     putTask(tasks[0].id, task);
     setTask({
       id: tasks[0].id,
-      title: tasks[0].title,
-      description: tasks[0].description,
-      completed: tasks[0].completed,
+      title: "",
+      description: "",
+      completed: null,
       startDate: tasks[0].startDate,
       endDate: tasks[0].endDate,
       personId: tasks[0].personId,
@@ -42,10 +44,12 @@ export default function EditTask({ tasks }) {
             <label>
               <h1 className={styles.txth1}>Title:</h1>
               <input
+              className={styles.ipt}
                 placeholder={tasks[0].title}
                 name="title"
                 onChange={handleInputChange}
               />
+              {errors.title && <p className={styles.danger}>{errors.title}</p>}
             </label>
             <label>
               <h1 className={styles.txth1}>Description:</h1>
@@ -55,26 +59,39 @@ export default function EditTask({ tasks }) {
                 onChange={handleInputChange}
                 className={styles.txtarea}
               />
+              {errors.description && (
+                <p className={styles.danger}>{errors.description}</p>
+              )}
             </label>
             <label>
               <h1 className={styles.txth1}>Status:</h1>
 
-              {tasks[0].completed === true ? (
-                <select name="completed" onChange={handleInputChange}>
-                  <option value={true}>Completed</option>
-                  <option value={false}> Not Completed</option>
-                </select>
-              ) : (
-                <select name="completed" onChange={handleInputChange}>
-                  <option value={false}> Not Completed</option>
-                  <option value={true}>Completed</option>
-                </select>
+              <select name="completed" onChange={handleInputChange}>
+                <option></option>
+                <option value={true}>Completed</option>
+                <option value={false}> Not Completed</option>
+              </select>
+
+              {errors.completed && (
+                <p className={styles.danger}>{errors.completed}</p>
               )}
             </label>
-            <button type="submit" className={styles.btn}>Submit</button>{" "}
+            <button
+              type="submit"
+              className={
+                errors.title || errors.description
+                  ? styles.deshabilitado
+                  : styles.btn
+              }
+            >
+              Submit
+            </button>{" "}
           </form>
 
-          <a href={`/profile/${tasks[0].personId}`} className={styles.txt}> Volver Atrás</a>
+          <a href={`/profile/${tasks[0].personId}`} className={styles.txt}>
+            {" "}
+            Bring me back!
+          </a>
         </div>
       </Layout>
     </>

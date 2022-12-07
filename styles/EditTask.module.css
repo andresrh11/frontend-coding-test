@@ -31,6 +31,9 @@
 .txtarea{
     width: 300px;
     height: 150px;
+    border: 1px dashed grey;
+    box-shadow: 2px 2px 15px #30303021;
+    border-radius: 3px;
 }
 .btn{
     background: black;
@@ -48,7 +51,43 @@
     border: 1px dashed grey;
     box-shadow: 2px 2px 15px #30303021;
     border-radius: 3px;
+    height: 30px;
+    width: 200px;
 }
+.danger{
+    color: red; 
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+}
+.deshabilitado{
+    display: none;
+}
+.btn__info{
+    background: black;
+    cursor: pointer;
+    border: none;
+    padding: 16px 32px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    position: fixed;
+    border-radius: 12px;
+    top: 40px;
+    right: 20px;
+}
+.btn__info::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    background: linear-gradient( 45deg, red, blue, deeppink,blue,red,blue,deeppink,blue);
+    background-size: 800%;
+    border-radius: 10px;
+    filter: blur(8px);
+    animation: pixeld 20s linear infinite;
+    z-index: -1;
+  }
 .btn::before{
     content: '';
     position: absolute;
@@ -82,7 +121,12 @@
         
         width: auto;
         height: auto;
-       
+       margin-bottom: 70px;
     }
+    .btn__info{
+        top: auto;
+        bottom: 20px;
+        margin-left: 15px;
+       }
    
   }

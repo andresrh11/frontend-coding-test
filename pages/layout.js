@@ -13,7 +13,7 @@ export default function Layout({ children }) {
       </Head>
       <nav className={styles.navbar}>
         <Link href="/">
-          <li className={styles.list}>Home</li>
+          <li className={styles.list}>🏠Home</li>
         </Link>
       </nav>
       <main>{children}</main>

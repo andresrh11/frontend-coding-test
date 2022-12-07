@@ -1,16 +1,18 @@
 import axios from "axios";
-
 import { useState } from "react";
 import Layout from "../../layout";
 import styles from "../../../styles/EditTask.module.css";
+import validationsProfile from "../../../validations";
+
 export default function Edit({ person }) {
+  const [errors, setErrors] = useState({});
   const [persona, setPersona] = useState({
-    fullName: person.fullName,
-    age: person.age,
-    occupation: person.occupation,
-    nickname: person.nickname,
-    gender: person.gender,
-    picture: person.picture,
+    fullName: "",
+    age: "",
+    occupation: "",
+    nickname: "",
+    gender: "",
+    picture: "",
   });
 
   const handleInputChange = (e) => {
@@ -18,17 +20,20 @@ export default function Edit({ person }) {
       ...persona,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      validationsProfile({ ...persona, [e.target.name]: e.target.value })
+    );
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     putPerson(person.id, persona);
     setPersona({
-      fullName: person.fullName,
-      age: person.age,
-      occupation: person.occupation,
-      nickname: person.nickname,
-      gender: person.gender,
-      picture: person.picture,
+      fullName: "",
+      age: "",
+      occupation: "",
+      nickname: "",
+      gender: "",
+      picture: "",
     });
   };
   return (
@@ -44,6 +49,9 @@ export default function Edit({ person }) {
                 name="fullName"
                 onChange={handleInputChange}
               />
+              {errors.fullName && (
+                <p className={styles.danger}>{errors.fullName}</p>
+              )}
             </label>
             <label>
               <h1 className={styles.txth1}>Age:</h1>
@@ -53,6 +61,7 @@ export default function Edit({ person }) {
                 name="age"
                 onChange={handleInputChange}
               />
+              {errors.age && <p className={styles.danger}>{errors.age}</p>}
             </label>
             <label>
               <h1 className={styles.txth1}>Occupation:</h1>
@@ -62,6 +71,9 @@ export default function Edit({ person }) {
                 name="occupation"
                 onChange={handleInputChange}
               />
+              {errors.occupation && (
+                <p className={styles.danger}>{errors.occupation}</p>
+              )}
             </label>
             <label>
               <h1 className={styles.txth1}>Nickname:</h1>
@@ -71,6 +83,9 @@ export default function Edit({ person }) {
                 name="nickname"
                 onChange={handleInputChange}
               />
+              {errors.nickname && (
+                <p className={styles.danger}>{errors.nickname}</p>
+              )}
             </label>
             <label>
               <h1 className={styles.txth1}>Gender:</h1>
@@ -80,6 +95,9 @@ export default function Edit({ person }) {
                 name="gender"
                 onChange={handleInputChange}
               />
+              {errors.gender && (
+                <p className={styles.danger}>{errors.gender}</p>
+              )}
             </label>
             <label>
               <h1 className={styles.txth1}>Picture:</h1>
@@ -89,14 +107,38 @@ export default function Edit({ person }) {
                 name="picture"
                 onChange={handleInputChange}
               />
+              {errors.picture && (
+                <p className={styles.danger}>{errors.picture}</p>
+              )}
             </label>
-            <button type="submit" className={styles.btn}>
+            <button
+              type="submit"
+              className={
+                errors.fullName ||
+                errors.age ||
+                errors.nickname ||
+                errors.occupation ||
+                errors.picture ||
+                errors.gender
+                  ? styles.deshabilitado
+                  : styles.btn
+              }
+            >
               Submit
             </button>
           </form>
           <a href={`/profile/${person.id}`} className={styles.txt}>
             {" "}
-            Volver Atrás
+            Bring me back!
+          </a>
+          <a
+            href="https://www.linkpicture.com/en/?set=en"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <button className={styles.btn__info}>
+              Get your picture link here
+            </button>
           </a>
         </div>
       </Layout>
