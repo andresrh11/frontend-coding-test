@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { useState } from "react";
 import Layout from "../../layout";
-
+import styles from "../../../styles/EditTask.module.css";
 export default function Edit({ person }) {
   const [persona, setPersona] = useState({
     fullName: person.fullName,
@@ -34,57 +34,71 @@ export default function Edit({ person }) {
   return (
     <>
       <Layout>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <h1>Full Name:</h1>
-            <input
-              placeholder={person.fullName}
-              name="fullName"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Age:</h1>
-            <input
-              placeholder={person.age}
-              name="age"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Occupation:</h1>
-            <input
-              placeholder={person.occupation}
-              name="occupation"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Nickname:</h1>
-            <input
-              placeholder={person.nickname}
-              name="nickname"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Gender:</h1>
-            <input
-              placeholder={person.gender}
-              name="gender"
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <h1>Picture:</h1>
-            <input
-              placeholder={person.picture}
-              name="picture"
-              onChange={handleInputChange}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <div className={styles.container}>
+          <form onSubmit={handleSubmit} className={styles.form__task}>
+            <label>
+              <h1 className={styles.txth1}>Full Name:</h1>
+              <input
+                className={styles.ipt}
+                placeholder={person.fullName}
+                name="fullName"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Age:</h1>
+              <input
+                className={styles.ipt}
+                placeholder={person.age}
+                name="age"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Occupation:</h1>
+              <input
+                className={styles.ipt}
+                placeholder={person.occupation}
+                name="occupation"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Nickname:</h1>
+              <input
+                className={styles.ipt}
+                placeholder={person.nickname}
+                name="nickname"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Gender:</h1>
+              <input
+                className={styles.ipt}
+                placeholder={person.gender}
+                name="gender"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Picture:</h1>
+              <input
+                className={styles.ipt}
+                placeholder={person.picture}
+                name="picture"
+                onChange={handleInputChange}
+              />
+            </label>
+            <button type="submit" className={styles.btn}>
+              Submit
+            </button>
+          </form>
+          <a href={`/profile/${person.id}`} className={styles.txt}>
+            {" "}
+            Volver Atrás
+          </a>
+        </div>
       </Layout>
     </>
   );

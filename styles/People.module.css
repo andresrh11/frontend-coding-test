@@ -1,0 +1,130 @@
+.txt{
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    font-weight: bold;
+    font-size: large;
+    
+}
+.div__edit{
+    width: 800px;
+    height: auto;
+    display:flex ;
+    flex-flow: column;
+    justify-items: center;
+    align-items: center;
+    
+    padding-top: 10px;
+}
+.img__edit{
+    height: 300px;
+    width: 300px;
+    border-radius: 5px;
+}
+.task{
+    box-shadow: 2px 2px 15px #30303021;
+    width: 600px;
+    height: auto;
+    margin-bottom: 15px;
+    padding-left: 10px ;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+.div__btn{
+    display: flex;
+    justify-content: space-around;
+}
+.container{
+    display: flex;
+    
+    justify-content: center;
+    
+    align-items: center;
+}
+.txth1{
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 1200;
+    font-size: xx-large; 
+}
+.btn__info{
+    background: black;
+    cursor: pointer;
+    border: none;
+    padding: 16px 32px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    position: fixed;
+    border-radius: 12px;
+    top: 40px;
+    right: 20px;
+}
+.btn__info::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    background: linear-gradient( 45deg, red, blue, deeppink,blue,red,blue,deeppink,blue);
+    background-size: 800%;
+    border-radius: 10px;
+    filter: blur(8px);
+    animation: pixeld 20s linear infinite;
+    z-index: -1;
+  }
+  .btn{
+    background: black;
+    cursor: pointer;
+    border: none;
+    padding: 16px 32px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    border-radius: 12px;
+    
+}
+.btn::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    background: linear-gradient( 45deg, red, blue, deeppink,blue,red,blue,deeppink,blue);
+    background-size: 800%;
+    border-radius: 10px;
+    filter: blur(8px);
+    animation: pixeld 20s linear infinite;
+    z-index: -1;
+  }
+  @keyframes pixeld {
+    0%{
+        background-position: 0 0;
+    }
+    50%{
+        background-position: 400% 0;
+
+    }
+    100%{
+        background-position: 0 0;
+    }
+
+  }
+@media (max-width:800px){
+    .div__edit{
+        width: 550px;
+        margin-bottom: 100px;
+    }
+   .task{
+    width: 330px;
+    height: auto;
+   }
+   .btn__info{
+    top: auto;
+    bottom: 20px;
+   }
+   .btn{
+    font-size: 12px;
+    padding: 8px 16px;
+   }
+  }

@@ -2,6 +2,7 @@ import Layout from "../../layout";
 import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
+import styles from "../../../styles/EditTask.module.css";
 export default function EditTask({ tasks }) {
   console.log(tasks);
   const [task, setTask] = useState({
@@ -35,44 +36,47 @@ export default function EditTask({ tasks }) {
   };
   return (
     <>
-      <Layout></Layout>
+      <Layout>
+        <div className={styles.container}>
+          <form onSubmit={handleSubmit} className={styles.form__task}>
+            <label>
+              <h1 className={styles.txth1}>Title:</h1>
+              <input
+                placeholder={tasks[0].title}
+                name="title"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Description:</h1>
+              <textarea
+                placeholder={tasks[0].description}
+                name="description"
+                onChange={handleInputChange}
+                className={styles.txtarea}
+              />
+            </label>
+            <label>
+              <h1 className={styles.txth1}>Status:</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          <h1>Title:</h1>
-          <input
-            placeholder={tasks[0].title}
-            name="title"
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          <h1>Description:</h1>
-          <input
-            placeholder={tasks[0].description}
-            name="description"
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          <h1>Status:</h1>
+              {tasks[0].completed === true ? (
+                <select name="completed" onChange={handleInputChange}>
+                  <option value={true}>Completed</option>
+                  <option value={false}> Not Completed</option>
+                </select>
+              ) : (
+                <select name="completed" onChange={handleInputChange}>
+                  <option value={false}> Not Completed</option>
+                  <option value={true}>Completed</option>
+                </select>
+              )}
+            </label>
+            <button type="submit" className={styles.btn}>Submit</button>{" "}
+          </form>
 
-          {tasks[0].completed === true ? (
-            <select name="completed" onChange={handleInputChange}>
-              <option value={true}>Completed</option>
-              <option value={false}> Not Completed</option>
-            </select>
-          ) : (
-            <select name="completed" onChange={handleInputChange}>
-              <option value={false}> Not Completed</option>
-              <option value={true}>Completed</option>
-            </select>
-          )}
-        </label>
-        <button type="submit">Submit</button>{" "}
-      </form>
-
-      <a href={`/profile/${tasks[0].personId}`}> Volver Atrás</a>
+          <a href={`/profile/${tasks[0].personId}`} className={styles.txt}> Volver Atrás</a>
+        </div>
+      </Layout>
     </>
   );
 }

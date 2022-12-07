@@ -2,7 +2,7 @@ import Link from "next/link";
 import Layout from "../layout";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import styles from "../../styles/People.module.css";
 export default function People({ person, tasks }) {
   const [task, setTask] = useState({
     title: "",
@@ -45,40 +45,48 @@ export default function People({ person, tasks }) {
   return (
     <>
       <Layout>
-        <div>
-          <img src={person.picture} />
-          <h1>
-            {person.fullName} ({person.nickname})
-          </h1>
-          <h2>{person.occupation} </h2>
-          <h3>{person.gender}</h3>
-          <h3>{person.age} Years Old</h3>
-        </div>
-        <div>
-          {tasks.map((e, i) => {
-            return (
-              <div key={i}>
-                <h1> {e.title}</h1>
-                <p>{e.description}</p>
-                <h2>{e.completed ? "Completed" : "Not Completed"}</h2>
-                <Link href={`/tasks/${e.id}/edit`}>
-                  <button>Edit task</button>
-                </Link>
-                <Link href={`/profile/${person.id}`}>
-                  <button value={e.id} onClick={handleClick}>
-                    {e.completed
-                      ? "Mark as not completed"
-                      : "Mark as completed"}
-                  </button>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-        <div>
-          <Link href={`/profile/${person.id}`}>
-            <button>Edit Information</button>
-          </Link>
+        <div className={styles.container}>
+          <div className={styles.div__edit}>
+            <img src={person.picture} className={styles.img__edit} />
+            <h1 className={styles.txth1}>
+              {person.fullName} ({person.nickname})
+            </h1>
+            <h2 className={styles.txt}>{person.occupation} </h2>
+            <h3 className={styles.txt}>{person.gender}</h3>
+            <h3 className={styles.txt}> {person.age} Years Old</h3>
+            {tasks.map((e, i) => {
+              return (
+                <div key={i} className={styles.task}>
+                  <h1 className={styles.txth1}> {e.title}</h1>
+                  <p className={styles.txt}>{e.description}</p>
+                  <h2 className={styles.txt}>
+                    {e.completed ? "Completed" : "Not Completed"}
+                  </h2>
+                  <div className={styles.div__btn}>
+                    <Link href={`/tasks/${e.id}/edit`}>
+                      <button className={styles.btn}>Edit task</button>
+                    </Link>
+                    <Link href={`/profile/${person.id}`}>
+                      <button
+                        value={e.id}
+                        onClick={handleClick}
+                        className={styles.btn}
+                      >
+                        {e.completed
+                          ? "Mark as not completed"
+                          : "Mark as completed"}
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <Link href={`/profile/${person.id}/edit`}>
+              <button className={styles.btn__info}>Edit Information</button>
+            </Link>
+          </div>
         </div>
       </Layout>
     </>

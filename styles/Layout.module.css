@@ -1,0 +1,11 @@
+.list{
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    font-size: x-large;
+    text-align: center;
+    cursor: pointer;
+    font-family:Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    box-shadow: 3px ;
+}

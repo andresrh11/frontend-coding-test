@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-
+import styles from "../styles/HomePage.module.css";
 import Layout from "./layout";
 
 function HomePage({ people }) {
@@ -35,36 +35,45 @@ function HomePage({ people }) {
   };
   return (
     <>
-      <div>
-        <nav>
-          <Layout>
-            <div className="flex">
+      {" "}
+      <Layout>
+        <div>
+          <nav>
+            <div className={styles.filter}>
               <h2>Order By Age:</h2>
               <Link href="/">
-                <select onChange={handleChange}>
+                <select onChange={handleChange} className={styles.select}>
                   <option value="asc">Asc</option>
                   <option value="desc">Desc</option>
                 </select>
               </Link>
             </div>
-          </Layout>
-        </nav>
-      </div>
-      <h1>List Of People</h1>
-      <div className="grid gap-4 grid-cols-3 grid-rows-auto">
-        {cards.map((e, i) => {
-          return (
-            <Link href={`/profile/${e.id}`} key={i}>
-              <div className="w-6 h-6 cursor-pointer">
-                <img src={e.picture} alt={e.fullName} />
-                <h1>{e.fullName}</h1>
-                <h2>{e.age}</h2>
-                <h2>{e.occupation}</h2>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+          </nav>
+        </div>
+        <h1 className={styles.title}>List Of People</h1>
+        <div className={styles.cards}>
+          {cards.map((e, i) => {
+            return (
+              <Link href={`/profile/${e.id}`} key={i}>
+                <div className={styles.cards__unit}>
+                  <div className={styles.img__div}>
+                    <img
+                      src={e.picture}
+                      alt={e.fullName}
+                      className={styles.img__card}
+                    />
+                  </div>
+                  <div className={styles.h1__card}>
+                    <h1 className={styles.txt}>{e.fullName}</h1>
+                  </div>
+                  <h2 className={styles.txt}>{e.age}</h2>
+                  <h2 className={styles.txt}>{e.occupation}</h2>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </Layout>
     </>
   );
 }
